@@ -6,10 +6,7 @@ from .forms import *
 
 def profile_list(request):
     profiles = Profile.objects.all()
-    form = ProfileForm()
-    print(profiles)
     context = {
         'profiles' : profiles,
-        'form' : form,
     }
     return render(request, 'users/profile_list.html', context)

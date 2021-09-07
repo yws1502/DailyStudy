@@ -1,18 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="">
-        {% for profile in profiles %}
-            {{profile.user_name}}
-            {{profile.owner}}
-            {{profile.short_intro}}
-        {% endfor %}
-    </form>
-</body>
-</html>
+{% extends 'main.html' %}
+
+{% block content %}
+<!-- MAIN SECTION -->
+<main class="home">
+    <section class="hero-section text-center">
+        <div class="contatiner container--narrow">
+            <div class="hero-section__box">
+                <h2>STUDY WITH ME</h2>
+                <h2>WELCOMTE TO <span>Daily Study</span></h2>
+            </div>
+
+            <div class="hero-section__search">
+                <form id="searchForm" class="form" action="#" method="GET">
+                    <div class="form__field">
+                        <label for="formInput#search">Search FRIEND</label>
+                        <input class="input input--text" id="formInput#search" type="text" name="search_query"
+                            value="" placeholder="Search by Friend name" />
+                    </div>
+                    <input class="btn btn--sub btn--lg" type="submit" value="Search" />
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEARCH RESULT: USERLIST -->
+    <section class="devlist">
+        <div class="contatainer">
+            <div class="grid grid--three">
+                {% for profile in profiles %}
+                    <div class="column card">
+                        <div class="dev">
+                            <a href="#" class="card__body">
+                                <div class="dev__profile">
+                                    <img class="avatar avatar--md" src="{{profile.profile_image.url}}" alt="image">
+                                    <div class="dev__meta">
+                                        <h3>{{profile.nick_name}}</h3>
+                                        <h5>{{profile.short_intro|slice:"60"}}</h5>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+    </section>
+</main>
+
+{% endblock content %}
