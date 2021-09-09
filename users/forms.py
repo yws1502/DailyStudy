@@ -44,3 +44,15 @@ class AlgorithmForm(forms.ModelForm):
         for name, field in self.fields.items():
             field.widget.attrs.update(
                 {'class': 'input', 'placeholder': 'Add %s' % name})
+
+class MessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        exclude = ['is_read']
+    
+    def __init__(self, *args, **kwargs):
+        super(MessageForm, self).__init__(*args, **kwargs)
+
+        for name, field in self.fields.items():
+            field.widget.attrs.update(
+                {'class': 'input', 'placeholder': 'Add %s' % name})
