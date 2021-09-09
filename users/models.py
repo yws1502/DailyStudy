@@ -25,19 +25,3 @@ class Profile(models.Model):
 
     def __str__(self):
         return str(self.owner) + '--' + self.user_name
-
-# from django.db.models.signals import post_save
-
-# def create_profile(sender, instance, created, **kwargs):
-#     # 회원가입을 하면 자동으로 profile의 일부를 채워주기
-#     print(created, '<<<<<<<<<<<<<<<<<<<')
-#     if created:
-#         user = instance
-#         profile = Profile.objects.create(
-#             owner = user,
-#             user_name = user.username,
-#             email = user.email,
-#             name = user.first_name,
-#         )
-
-# post_save.connect(create_profile, sender=User)
