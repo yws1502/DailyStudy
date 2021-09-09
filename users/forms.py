@@ -6,7 +6,15 @@ from .models import *
 class ProfileForm(ModelForm):
     class Meta:
         model = Profile
-        fields = '__all__'
+        exclude = ['owner', 'user_name', 'solved_count', 'group_id', 'group_reader']
+    
+    def __init__(self, *args, **kwargs):
+        super(ProfileForm, self).__init__(*args, **kwargs)
+
+        for name, field in self.fields.items():
+            field.widget.attrs.update(
+                {'class': 'input', 'placeholder': 'Add  %s' % name}
+            )
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:

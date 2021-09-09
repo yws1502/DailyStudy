@@ -9,6 +9,7 @@ from .forms import *
 
 ## Login / Logout / Register ##
 def login_user(request):
+    page = 'login'
     # 로그인된 상태로 URL로 접근하는 경우 예외처리
     if request.user.is_authenticated:
         return redirect('profiles')
@@ -30,7 +31,7 @@ def login_user(request):
             return redirect('profiles')
         else:
             messages.error(request, '아이디 혹은 비밀번호가 틀렸습니다.')
-    return render(request, 'users/login_register.html')
+    return render(request, 'users/login_register.html', {'page':page})
 
 def logout_user(request):
     logout(request)
@@ -48,7 +49,7 @@ def register_user(request):
             user.save()
             messages.success(request, '회원가입 되었습니다.')
             login(request, user)
-            return redirect('#') # profile 생성하는데로 이동하기
+            return redirect('profile_update') # profile 생성하는데로 이동하기
         else:
             messages.error(request, '회원가입 도중 오류가 발생하였습니다.')
 
@@ -62,3 +63,23 @@ def profiles(request):
         'profiles' : profiles,
     }
     return render(request, 'users/profiles.html', context)
+
+def profile(request, pk):
+    profile = Profile.objects.get(id=pk)
+    context = {
+        'profile' : profile,
+    }
+    return render(request, 'users/profile.html', context)
+
+def profile_update(request):
+    profile = request.user.profile
+    form = ProfileForm(instance=profile)
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile', pk=profile.id)
+
+    context = {'form' : form}
+    return render(request, 'users/profile_update.html', context)
