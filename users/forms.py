@@ -27,3 +27,15 @@ class CustomUserCreationForm(UserCreationForm):
         for name, field in self.fields.items():
             field.widget.attrs.update(
                 {'class' : 'input', 'placeholder' : 'Add %s' % name})
+
+class AlgorithmForm(ModelForm):
+    class Meta:
+        model = Algorithm
+        exclude = ['profile_id']
+    
+    def __init__(self, *args, **kwargs):
+        super(AlgorithmForm, self).__init__(*args, **kwargs)
+
+        for name, field in self.fields.items():
+            field.widget.attrs.update(
+                {'class': 'input', 'placeholder': 'Add %s' % name})

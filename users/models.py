@@ -24,4 +24,38 @@ class Profile(models.Model):
     group_reader = models.BooleanField(default=False)
 
     def __str__(self):
-        return str(self.owner) + '--' + self.user_name
+        return str(self.owner)
+
+class Algorithm(models.Model):
+    language_choices = [
+        ('Python3', 'Python3'),
+        ('PyPy3', 'PyPy3'),
+        ('Java11', 'Java11'),
+        ('C99', 'C99'),
+        ('C++17', 'C++17'),
+        ('JS', 'JS'),
+        ('GO', 'GO'),
+        ('Ruby', 'Ruby'),
+    ]
+    type_choices = [
+        ('Implementation', 'Implementation'),
+        ('Greedy', 'Greedy'),
+        ('String', 'String'),
+        ('DataStructures', 'DataStructures'),
+        ('Graphs', 'Graphs'),
+        ('DP', 'DP'),
+        ('Math', 'Math'),
+        ('Bruteforce', 'Bruteforce'),
+        ('etc', 'etc')
+    ]
+    profile_id = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True)
+    language = models.CharField(max_length=10, choices=language_choices)
+    name = models.CharField(max_length=100)
+    description = models.TextField(max_length=500)
+    link = models.URLField(max_length=200)
+    type = models.CharField(max_length=20, choices=type_choices)
+    created = models.DateTimeField(auto_now_add=True)
+    id = models.UUIDField(default=uuid4, unique=True, primary_key=True, editable=False)
+
+    def __str__(self):
+        return self.name
