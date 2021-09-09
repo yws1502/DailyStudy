@@ -17,6 +17,7 @@ class Profile(models.Model):
     social_instagram = models.CharField(max_length=200, null=True, blank=True)
     social_linkedin = models.CharField(max_length=200, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
+    coding_start_date = models.DateField(null=True, blank=True)
     id = models.UUIDField(default=uuid4, primary_key=True, unique=True, editable=False)
     # study group information
     solved_count = models.IntegerField(default=0, null=True, blank=True)
