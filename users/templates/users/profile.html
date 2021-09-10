@@ -10,6 +10,8 @@
                     <div class="card__body dev">
                         {% if profile.owner == request.user %}
                         <a class="tag tag--pill tag--main settings__btn" href="{% url 'profile_update' %}"><i class="im im-edit"></i> Edit</a>
+                        {% else %}
+                        <a class="tag tag--pill tag--main settings__btn" href="{% url 'message_create' profile.id %}"><i class="im im-edit"></i> Message</a>
                         {% endif %}
                         <img class="avatar avatar--xl dev__avatar" src="{{profile.profile_image.url}}" alt="image">
                         <h2 class="dev__name">{{profile.name}}</h2>
@@ -49,8 +51,9 @@
                 <table class="settings__table">
                     <tr>
                         <td class="settings__thumnail">
-                            여기에 잔디 or 아니면 백준 처럼<br>
-                            
+                            {% for algorithm in algorithms %}
+                                <a class="tag tag--pill tag--main setting__btn" href="{{algorithm.link}}">{{algorithm.name}}</a>
+                            {% endfor %}
                         </td>
                     </tr>
                 </table>
@@ -59,24 +62,25 @@
                     <h3 class="settings__title">Algorithms</h3>
                     
                     {% if profile.owner == request.user %}
-                    <a class="tag tag--pill tag--sub setting__btn tag--lg" href="#"><i class="im im-plus"></i> Up load</a>
+                    <a class="tag tag--pill tag--sub setting__btn tag--lg" href="{% url 'algorithm_create' %}"><i class="im im-plus"></i> Upload</a>
                     {% endif %}
                 </div>
 
                 <table class="settings__table">
+                    {% for algorithm in algorithms %}
                     <tr>
                         <td class="settings__tableInfo">
-                            <h4>문제명 - 유형</h4>  <br>
-                            <a href="#">문제 링크</a>
-                            <p>문제설명</p>
+                            <h4><a href="{{algorithm.link}}">{{algorithm.name}}</a>- {{algorithm.type}}</h4>  <br>
+                            <p class="devInfo__about">{{algorithm.description}}</p>
                         </td>
                         <td class="settings__tableActions">
                             {% if profile.owner == request.user %}
-                            <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-edit"></i> Edit</a>
-                            <a class="tag tag--pill tag--main settings__btn" href="#"><i class="im im-x-mark-circle-o"></i>Delete</a>
+                            <a class="tag tag--pill tag--main settings__btn" href="{% url 'algorithm_update' pk=algorithm.id %}"><i class="im im-edit"></i> Edit</a>
+                            <a class="tag tag--pill tag--main settings__btn" href="{% url 'algorithm_delete' pk=algorithm.id %}"><i class="im im-x-mark-circle-o"></i>Delete</a>
                             {% endif %}
                         </td>
                     </tr>
+                    {% endfor %}
                 </table>
             </div>
         </div>
