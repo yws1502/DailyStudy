@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 
 from .models import *
 from .forms import *
+from .utils import *
 # Create your views here.
 
 ## Login / Logout / Register ##
@@ -59,9 +60,10 @@ def register_user(request):
 ## profile ##
 def profiles(request):
     profiles = Profile.objects.all()
-    context = {
-        'profiles' : profiles,
-    }
+
+    profiles, page_range = paginator_profile(request, profiles, 4)
+
+    context = {'profiles' : profiles, 'page_range' : page_range}
     return render(request, 'users/profiles.html', context)
 
 def profile(request, pk):

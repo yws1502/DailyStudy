@@ -44,8 +44,10 @@
                 {% endfor %}
             </div>
         </div>
-
     </section>
+
+    <!-- pagination -->
+    {% include 'pagination.html' with queryset=profiles page_range=page_range %}
 </main>
 
 {% endblock content %}
