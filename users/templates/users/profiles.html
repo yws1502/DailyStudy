@@ -11,11 +11,11 @@
             </div>
 
             <div class="hero-section__search">
-                <form id="searchForm" class="form" action="#" method="GET">
+                <form id="searchForm" class="form" action="{% url 'profiles' %}" method="GET">
                     <div class="form__field">
                         <label for="formInput#search">Search FRIEND</label>
                         <input class="input input--text" id="formInput#search" type="text" name="search_query"
-                            value="" placeholder="Search by Friend name" />
+                            value="{{search_query}}" placeholder="Search by Friend name" />
                     </div>
                     <input class="btn btn--sub btn--lg" type="submit" value="Search" />
                 </form>

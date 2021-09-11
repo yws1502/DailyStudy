@@ -1,4 +1,6 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import Q
+from .models import Profile
 
 def paginator_profile(request: object, profile: object, result: int) -> None:
   page = request.GET.get('page')
@@ -23,3 +25,15 @@ def paginator_profile(request: object, profile: object, result: int) -> None:
   
   page_range = range(left_idx, right_idx)
   return profiles, page_range
+
+def search_profile(request: object) -> None:
+  search_query = ''
+  if request.GET.get('search_query'):
+    search_query = request.GET.get('search_query')
+    
+  profiles = Profile.objects.filter(
+    Q(name__icontains = search_query) |
+    Q(short_intro = search_query)
+  )
+
+  return profiles, search_query
