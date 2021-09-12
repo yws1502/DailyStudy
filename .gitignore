@@ -3,9 +3,6 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-# db
-db.sqlite3
-
 # Secret
 secrets.json
 
@@ -19,6 +16,9 @@ __pycache__/
 *.user
 *.userosscache
 *.sln.docstates
+
+# DataBase
+db.sqlite3
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

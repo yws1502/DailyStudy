@@ -10,8 +10,8 @@
             <form class="form" method="POST">
                 {% csrf_token %}
                 <p>정말 "{{object}}"를 지우시겠습니까??</p>
-                <a class="btn btn--sub btn--lg my-md" href="#">뒤로가기</a>
-                <input class="btn btn--sub btn--lg my-md" type="submit" value="삭제하기">
+                <a class="btn btn--sub btn--m my-md" href="{{request.GET.prev}}">뒤로가기</a>
+                <input class="btn btn--sub btn--m my-md" type="submit" value="삭제하기">
             </form>
         </div>
     </div>
