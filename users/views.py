@@ -130,7 +130,7 @@ def algorithm_delete(request, pk):
         algorithm.delete()
         return redirect('profile', pk=profile.id)
 
-    context = {'object':algorithm}
+    context = {'object':algorithm, 'prev':profile}
     return render(request, 'delete_form.html', context)
 
 ## message ##
@@ -179,3 +179,13 @@ def message_create(request, pk):
         'form' : form,
     }
     return render(request, 'users/message_form.html', context)
+
+def message_delete(request, pk):
+    message = Message.objects.get(id=pk)
+
+    if request.method == 'POST':
+        message.delete()
+        return redirect('inbox')
+
+    context = {'object' : message}
+    return render(request, 'delete_form.html', context)
