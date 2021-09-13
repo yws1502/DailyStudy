@@ -90,7 +90,7 @@ def profile_update(request):
             return redirect('profile', pk=profile.id)
 
     context = {'form' : form}
-    return render(request, 'users/profile_update.html', context)
+    return render(request, 'users/profile_form.html', context)
 
 ## Algorithm ##
 def algorithm_create(request):

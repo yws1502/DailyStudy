@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<main class="formPage my-xl">
+    <div class="content-box">
+        <div class="formWrapper">
+            <a class="backButton" href="{% url 'profiles' %}"><i class="im im-home"></i></a>
+            <br>
+
+            <form class="form" method="POST">
+                {% csrf_token %}
+                <h3>정말 그만두실껀가요??😢</h3>
+                <br>
+                {% if profile.is_leader %}
+                  <b style="font-size: 20px;">차기 리더를 선택해주세요..</b>
+                {% endif %}
+                <div>
+                  <ul>
+                    {% for profile in profiles %}
+                    <li><input name="profile" type="radio" value="{{profile.id}}"> {{profile.name}}</li> 
+                    {% endfor %}
+                  </ul>
+                </div>
+                <a class="btn btn--sub btn--m my-md" href="{{request.GET.prev}}">뒤로가기</a>
+                <input class="btn btn--sub btn--m my-md" type="submit" value="탈퇴하기">
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

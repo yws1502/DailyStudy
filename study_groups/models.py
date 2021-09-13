@@ -6,7 +6,7 @@ from uuid import uuid4
 class StudyGroup(models.Model):
   name = models.CharField(max_length=200, unique=True, null=True, blank=True)
   group_image = models.ImageField(
-    upload_to='study_groups/', default='study_groups/default.jpg', null=True, blank=True)
+    upload_to='study_groups/', default='study_groups/Cloud.png', null=True, blank=True)
   goal = models.CharField(max_length=500, null=True, blank=True)
   penalty = models.CharField(max_length=500, null=True, blank=True)
   created = models.DateTimeField(auto_now_add=True)
