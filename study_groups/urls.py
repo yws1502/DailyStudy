@@ -4,5 +4,6 @@ from .views import *
 
 urlpatterns = [
   path('', study_groups, name='study_groups'),
+  path('group/<str:pk>/', study_group, name="study_group"),
   
 ]

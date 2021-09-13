@@ -4,7 +4,7 @@ from uuid import uuid4
 # Create your models here.
 
 class StudyGroup(models.Model):
-  name = models.CharField(max_length=200, null=True, blank=True)
+  name = models.CharField(max_length=200, unique=True, null=True, blank=True)
   group_image = models.ImageField(
     upload_to='study_groups/', default='study_groups/default.jpg', null=True, blank=True)
   goal = models.CharField(max_length=500, null=True, blank=True)

@@ -13,8 +13,8 @@
                 <div class="toggle-menu__lines"></div>
             </label>
             <ul class="header__menu">
-                <li class="header__menuItem"><a href="#">Study Group</a></li>
-                <li class="header__menuItem"><a href="{% url 'profiles' %}">Users</a></li>
+                <li class="header__menuItem"><a href="{% url 'study_groups' %}">스터디 그룹</a></li>
+                <li class="header__menuItem"><a href="{% url 'profiles' %}">열공이들</a></li>
                 
                 {% if request.user.is_authenticated %}
                     <li class="header__menuItem"><a href="{% url 'inbox' %}">메시지</a></li>
