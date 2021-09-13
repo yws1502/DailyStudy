@@ -17,8 +17,10 @@
                         <input class="input input--text" id="formInput#search" type="text" name="search_query"
                         placeholder="Search by Group name" value={{search_query}} >
                     </div>
-
-                    <input class="btn btn--sub btn--lg" type="submit" value="Search" />
+                    <input class="btn btn--sub btn--lg" type="submit" value="검색" />
+                    {% if request.user.profile.group_id == None %}
+                        <a class="btn btn--sub btn--lg" href="{% url 'group_create' %}">그룹 생성</a>
+                    {% endif %}
                 </form>
             </div>
         </div>
