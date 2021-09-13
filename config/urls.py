@@ -9,6 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     path('', include('users.urls')),
+    path('study_groups/', include('study_groups.urls')),
 ]
 
 # 임시적으로 웹페이지에 이미지파일을 보고싶을 때 적용한다.

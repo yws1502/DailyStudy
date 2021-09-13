@@ -1,6 +1,7 @@
-from typing import DefaultDict
 from django.db import models
 from django.contrib.auth.models import User
+
+from study_groups.models import *
 from uuid import uuid4
 # Create your models here.
 
@@ -22,7 +23,7 @@ class Profile(models.Model):
     id = models.UUIDField(default=uuid4, primary_key=True, unique=True, editable=False)
     # study group information
     solved_count = models.IntegerField(default=0, null=True, blank=True)
-    has_group = models.BooleanField(default=False)
+    group_id = models.ForeignKey(StudyGroup, on_delete=models.SET_NULL, null=True, blank=True)
     group_leader = models.BooleanField(default=False)
 
     def __str__(self):

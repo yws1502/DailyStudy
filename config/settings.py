@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'users.apps.UsersConfig',
+    'study_groups.apps.StudyGroupsConfig',
 ]
 
 MIDDLEWARE = [

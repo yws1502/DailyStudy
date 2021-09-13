@@ -1,0 +1,52 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<!-- Main Section -->
+<main class="projects">
+    <section class="hero-section text-center">
+        <div class="container container--narrow">
+            <div class="hero-section__box">
+                <h2>Search for <span>Study Group</span></h2>
+            </div>
+
+            <div class="hero-section__search">
+                <form id="searchForm" class="form" action="#" method="get">
+                    <div class="form__field">
+                        <label for="formInput#search">Search By Group </label>
+                        <input class="input input--text" id="formInput#search" type="text" name="search_query"
+                        placeholder="Search by Group name" value={{search_query}} >
+                    </div>
+
+                    <input class="btn btn--sub btn--lg" type="submit" value="Search" />
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Search Result: DevList -->
+    <section class="projectsList">
+        <div class="container">
+            <div class="grid grid--three">
+
+                {% for group in groups %}
+                <div class="column">
+                    <div class="card project">
+                        <a href="#" class="project">
+                            <img class="project__thumbnail" src="{{group.group_image.url}}" alt="project thumbnail" />
+                            <div class="card__body">
+                                <h3 class="project__title">{{group.name}}</h3>
+                                <p class="project--rating"><span style="font-weight: bold;">목표 : </span> {{group.goal}}</p>
+                                <p class="project--rating"><span style="font-weight: bold;">벌칙 : </span> {{group.penalty}}</p>
+                                <div class="project__tags">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock content %}
