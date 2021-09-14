@@ -19,7 +19,7 @@
                 <a class="singleProject__liveLink" href="{% url 'group_update' group.id %}"><i class="im im-external-link"></i>
                     업데이트
                 </a>
-                {% if requset.user.profile.is_leader %}
+                {% if request.user.profile.is_leader %}
                   <a class="singleProject__liveLink" href="{% url 'group_delete' group.id %}?prev=/study_groups"><i class="im im-external-link"></i>
                       스터디 해체😥
                   </a>

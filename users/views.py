@@ -61,7 +61,7 @@ def register_user(request):
 def profiles(request):
     profiles, search_query = search_profile(request)
     
-    profiles, page_range = paginator_profile(request, profiles, 4)
+    profiles, page_range = paginator_profile(request, profiles, 9)
 
     context = {
         'profiles' : profiles,
