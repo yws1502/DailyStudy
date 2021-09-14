@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from users.models import Profile
+from users.models import Profile, Message
 from .models import *
 from .forms import *
 # Create your views here.
@@ -88,3 +88,19 @@ def group_withdrawal(request, pk):
     profiles = Profile.objects.filter(is_leader=False, group_id=group)
     context['profiles'] = profiles
   return render(request, 'study_groups/withdrawal.html', context)
+
+def group_invite(request, pk):
+  recipient = Profile.objects.get(id=pk)
+  sender = request.user.profile
+  group_name = StudyGroup.objects.get(id=sender.group_id.id)
+
+  message = Message(
+    recipient = recipient,
+    sender = sender,
+    name = sender.name,
+    subject = '%s 스터디그룹 초대 메시지' % group_name,
+    body = '%s님! 저희 %s와 함께 공부해보아요!' % (recipient.name, group_name),
+    is_invite = True
+  )
+  message.save()
+  return redirect('profiles')

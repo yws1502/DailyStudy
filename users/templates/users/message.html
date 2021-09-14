@@ -16,10 +16,10 @@
             {{message.body|linebreaksbr}}
           </div>
           <br>
-          {% if message.is_invite %}
           <form class="form" method="POST">
             {% csrf_token %}
-            <input class="btn btn--sub btn--m" type="submit" value="스터디 참여">
+            {% if message.is_invite %}
+              <input class="btn btn--sub btn--m" type="submit" value="스터디 참여">
             {% endif %}
             <a class="btn btn--sub btn--m" href="{% url 'message_delete' pk=message.id %}?prev=/inbox">삭제</a>
           </form>

@@ -150,7 +150,11 @@ def message(request, pk):
     if message.is_read == False:
         message.is_read = True
         message.save()
-
+    if request.method == 'POST':
+        profile = request.user.profile
+        profile.group_id = message.sender.group_id
+        profile.save()
+        return redirect('study_group', pk=profile.group_id.id)
     context = {
         'message': message,
     }

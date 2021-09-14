@@ -9,9 +9,12 @@
                 <div class="card text-center">
                     <div class="card__body dev">
                         {% if profile.owner == request.user %}
-                        <a class="tag tag--pill tag--main settings__btn" href="{% url 'profile_update' %}"><i class="im im-edit"></i> Edit</a>
+                            <a class="tag tag--pill tag--main settings__btn" href="{% url 'profile_update' %}"><i class="im im-edit"></i> Edit</a>
                         {% else %}
-                        <a class="tag tag--pill tag--main settings__btn" href="{% url 'message_create' profile.id %}"><i class="im im-edit"></i> Message</a>
+                            <a class="tag tag--pill tag--main settings__btn" href="{% url 'message_create' profile.id %}"><i class="im im-edit"></i> Message</a>
+                        {% endif %}
+                        {% if profile.owner != request.user and not profile.group_id %}
+                            <a class="tag tag--pill tag--main settings__btn" href="{% url 'group_invite' profile.id %}"><i class="im im-edit"></i> Invite</a>
                         {% endif %}
                         <img class="avatar avatar--xl dev__avatar" src="{{profile.profile_image.url}}" alt="image">
                         <h2 class="dev__name">{{profile.name}}</h2>

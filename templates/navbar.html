@@ -19,6 +19,9 @@
                 {% if request.user.is_authenticated %}
                     <li class="header__menuItem"><a href="{% url 'inbox' %}">메시지</a></li>
                     <li class="header__menuItem"><a href="{% url 'profile' pk=request.user.profile.id %}">내 정보</a></li>
+                    {% if request.user.profile.group_id %}
+                        <li class="header__menuItem"><a href="{% url 'study_group' pk=request.user.profile.group_id.id %}">내 스터디</a></li>
+                    {% endif %}
                     <li class="header__menuItem"><a href="{% url 'logout' %}" class="btn btn--sub">Logout</a></li>
                 {% else %}
                     <li class="header__menuItem"><a href="{% url 'login' %}" class="btn btn--sub">Login/Sign Up</a></li>
