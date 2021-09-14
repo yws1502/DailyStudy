@@ -16,12 +16,10 @@ def paginator_profile(request: object, profile: object, result: int) -> None:
     profiles = paginator.page(page)
   
   left_idx = int(page) - result
-  if left_idx < 1:
-    left_idx = 1
+  if left_idx < 1: left_idx = 1
   
-  right_idx = int(page) + result
-  if right_idx > paginator.num_pages + 1:
-    right_idx = paginator.num_pages + 1
+  right_idx = int(page) + (result+1)
+  if right_idx > paginator.num_pages + 1: right_idx = paginator.num_pages + 1
   
   page_range = range(left_idx, right_idx)
   return profiles, page_range

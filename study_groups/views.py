@@ -3,21 +3,29 @@ from django.shortcuts import render, redirect
 from users.models import Profile, Message
 from .models import *
 from .forms import *
+from .utils import *
 # Create your views here.
 
 def study_groups(request):
   groups = StudyGroup.objects.all()
+  groups, search_query = search_groups(request)
+  groups, page_range = paginator_group(request, groups, 3)
+
   context = {
     'groups' : groups,
+    'page_range' : page_range,
+    'search_query' : search_query,
   }
   return render(request, 'study_groups/groups.html', context)
 
 def study_group(request, pk):
   group = StudyGroup.objects.get(id=pk)
   profiles = Profile.objects.filter(group_id=group.id)
+  member_count = profiles.count()
   context = {
     'group' : group,
     'profiles' : profiles,
+    'member_count' : member_count,
   }
   return render(request, 'study_groups/group.html', context)
 

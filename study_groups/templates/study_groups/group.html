@@ -12,10 +12,12 @@
                 <a class="singleProject__liveLink" href="#"><i class="im im-external-link"></i>
                     초대하기
                 </a>
+              {% if member_count > 1 %}
                 <a class="singleProject__liveLink" href="{% url 'group_withdrawal' group.id %}"><i class="im im-external-link"></i>
                     탈퇴하기
                 </a>
                 <br>
+              {% endif %}
                 <a class="singleProject__liveLink" href="{% url 'group_update' group.id %}"><i class="im im-external-link"></i>
                     업데이트
                 </a>
