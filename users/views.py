@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.db.models import Q
 
 from .models import *
 from .forms import *
@@ -59,7 +60,7 @@ def register_user(request):
 
 ## profile ##
 def profiles(request):
-    profiles, search_query = search_object(request)
+    profiles, search_query = search_profile(request)
     profiles, page_range = paginator_object(request, profiles, 6)
 
     context = {
@@ -72,9 +73,12 @@ def profiles(request):
 def profile(request, pk):
     profile = Profile.objects.get(id=pk)
     algorithms = profile.algorithm_set.all()
+    algorithms, search_query = search_algorithm(request, algorithms)
+
     context = {
         'profile' : profile,
         'algorithms' : algorithms,
+        'search_query' : search_query,
     }
     return render(request, 'users/profile.html', context)
 
