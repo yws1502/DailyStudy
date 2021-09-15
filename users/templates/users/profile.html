@@ -62,8 +62,17 @@
                 </table>
 
                 <div class="settings">
-                    <h3 class="settings__title">Algorithms</h3>
-                    
+                    <h3 class="settings__title">Algorithms</h3><br>
+                    <div class="hero-section__search">
+                        <form id="searchForm" class="form" action="{% url 'profiles' %}" method="GET">
+                            <div class="form__field">
+                                <label for="formInput#search">Search FRIEND</label>
+                                <input class="input input--text" id="formInput#search" type="text" name="search_query"
+                                    value="{{search_query}}" placeholder="Search by algorithm" style="height: 10px; width: 30px;"/>
+                            </div>
+                            <input class="btn btn--sub btn--sm" type="submit" value="Search" />
+                        </form>
+                    </div>
                     {% if profile.owner == request.user %}
                     <a class="tag tag--pill tag--sub setting__btn tag--lg" href="{% url 'algorithm_create' %}"><i class="im im-plus"></i> Upload</a>
                     {% endif %}
