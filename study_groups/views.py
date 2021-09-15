@@ -101,8 +101,7 @@ def group_invite(request, pk):
   recipient = Profile.objects.get(id=pk)
   sender = request.user.profile
   group_name = StudyGroup.objects.get(id=sender.group_id.id)
-
-  message = Message(
+  Message.objects.create(
     recipient = recipient,
     sender = sender,
     name = sender.name,
@@ -110,5 +109,5 @@ def group_invite(request, pk):
     body = '%s님! 저희 %s와 함께 공부해보아요!' % (recipient.name, group_name),
     is_invite = True
   )
-  message.save()
+  
   return redirect('profiles')
