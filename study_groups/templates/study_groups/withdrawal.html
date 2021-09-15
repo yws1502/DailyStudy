@@ -16,9 +16,13 @@
                 {% endif %}
                 <div>
                   <ul>
-                    {% for profile in profiles %}
-                    <li><input name="profile" type="radio" value="{{profile.id}}"> {{profile.name}}</li> 
-                    {% endfor %}
+                    <div class="form__field form__field--radio">
+                      <p>예비 스터디장 :</p>
+                      {% for profile in profiles %}
+                      <input class="input input--radio" id="formInput#radio-01" type="radio" value="{{profile.id}}" name="profile" >
+                      <label for="formInput#radio-01">{{profile.name}}</label>
+                      {% endfor %}
+                    </div>
                   </ul>
                 </div>
                 <a class="btn btn--sub btn--m my-md" href="{{request.GET.prev}}">뒤로가기</a>

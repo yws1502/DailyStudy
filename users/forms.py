@@ -11,7 +11,7 @@ class ProfileForm(forms.ModelForm):
     coding_start_date = forms.DateField(widget = forms.SelectDateWidget(years=START_YEAR_CHOICES))
     class Meta:
         model = Profile
-        exclude = ['owner', 'user_name', 'solved_count', 'group_id', 'group_reader']
+        exclude = ['owner', 'user_name', 'solved_count', 'group_id', 'is_leader']
 
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)

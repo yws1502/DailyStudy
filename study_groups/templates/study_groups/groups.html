@@ -49,6 +49,9 @@
             </div>
         </div>
     </section>
+
+    <!-- pagination -->
+    {% include 'pagination.html' with queryset=groups page_range=page_range %}
 </main>
 
 {% endblock content %}
