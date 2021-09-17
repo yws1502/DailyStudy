@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from users.models import Profile, Message
@@ -29,6 +30,7 @@ def study_group(request, pk):
   }
   return render(request, 'study_groups/group.html', context)
 
+login_required(login_url='login')
 def group_create(request):
   form = StudyGroupForm()
   profile = request.user.profile
@@ -47,6 +49,7 @@ def group_create(request):
   context = {'form' : form}
   return render(request, 'study_groups/group_form.html', context)
 
+login_required(login_url='login')
 def group_update(request, pk):
   group = StudyGroup.objects.get(id=pk)
   form = StudyGroupForm(instance=group)
@@ -62,6 +65,7 @@ def group_update(request, pk):
   }
   return render(request, 'study_groups/group_form.html', context)
 
+login_required(login_url='login')
 def group_delete(request, pk):
   group = StudyGroup.objects.get(id=pk)
   # 그룹 리더의 is_leader False로 값 변경
@@ -74,7 +78,8 @@ def group_delete(request, pk):
   context = {'object': group}
   return render(request, 'delete_form.html', context)
 
-def group_withdrawal(request, pk):
+login_required(login_url='login')
+def group_leave(request, pk):
   group = StudyGroup.objects.get(id=pk)
   profile = request.user.profile
 
@@ -97,6 +102,7 @@ def group_withdrawal(request, pk):
     context['profiles'] = profiles
   return render(request, 'study_groups/withdrawal.html', context)
 
+login_required(login_url='login')
 def group_invite(request, pk):
   recipient = Profile.objects.get(id=pk)
   sender = request.user.profile

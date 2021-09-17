@@ -9,11 +9,11 @@
             <div class="column column--1of3">
               <img class="singleProject__preview" src="{{group.group_image.url}}" alt="portfolio thumbnail" />
               {% if request.user.profile.group_id == group %}
-                <a class="singleProject__liveLink" href="#"><i class="im im-external-link"></i>
+                <a class="singleProject__liveLink" href="{% url 'profiles' %}"><i class="im im-external-link"></i>
                     초대하기
                 </a>
               {% if member_count > 1 %}
-                <a class="singleProject__liveLink" href="{% url 'group_withdrawal' group.id %}"><i class="im im-external-link"></i>
+                <a class="singleProject__liveLink" href="{% url 'group_leave' group.id %}"><i class="im im-external-link"></i>
                     탈퇴하기
                 </a>
                 <br>
