@@ -9,7 +9,7 @@ urlpatterns = [
   path('group_update/<str:pk>/', group_update, name="group_update"),
   path('group_delete/<str:pk>/', group_delete, name="group_delete"),
 
-  path('group_withdrawal/<str:pk>/', group_withdrawal, name="group_withdrawal"),
+  path('group_leave/<str:pk>/', group_leave, name="group_leave"),
   path('group_invite/<str:pk>/', group_invite, name="group_invite"),
   
 ]
