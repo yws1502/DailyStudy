@@ -5,6 +5,7 @@
 
 # Secret
 secrets.json
+bucket-policy.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
