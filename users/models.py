@@ -11,8 +11,8 @@ class Profile(models.Model):
     name = models.CharField(max_length=200)
     email = models.EmailField(max_length=500)
     user_name = models.CharField(max_length=200, unique=True)
-    short_intro = models.TextField(max_length=500, default='Hi there🖐')
-    about_me = models.TextField(max_length=500, default='네카라쿠배🛫',null=True, blank=True)
+    short_intro = models.TextField(max_length=500, default='Hi there')
+    about_me = models.TextField(max_length=500, default='네카라쿠배',null=True, blank=True)
     profile_image = models.ImageField(
         null=True, blank=True, upload_to='profiles/', default='profiles/user-default.png')
     social_github = models.CharField(max_length=200, null=True, blank=True)
