@@ -10,6 +10,6 @@ urlpatterns = [
   path('group_delete/<str:pk>/', group_delete, name="group_delete"),
 
   path('group_leave/<str:pk>/', group_leave, name="group_leave"),
-  path('group_invite/<str:pk>/', group_invite, name="group_invite"),
+  path('group_invite/', group_invite, name="group_invite"),
   
 ]

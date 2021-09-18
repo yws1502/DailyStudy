@@ -1,0 +1,56 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<!-- Main Section -->
+<main class="home">
+    <section class="hero-section text-center">
+        <div class="container container--narrow">
+            <div class="hero-section__box">
+                <h2>INVITE WITH <span>FRIEND</span></h2>
+                <h2>FROM AROUND THE WORLD</h2>
+            </div>
+
+            <div class="hero-section__search">
+                <form id="searchForm" class="form" action="{% url 'group_invite' %}" method="get">
+                    <div class="form__field">
+                        <label for="formInput#search">Search FRIEND </label>
+                        <input class="input input--text" id="formInput#search" type="text" name="search_query"
+                            value='{{search_query}}'  placeholder="Search by Friend name" />
+                    </div>
+                    <input class="btn btn--sub btn--lg" type="submit" value="Search" />
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="devlist">
+      <div class="container">
+        <form class="form" method="POST">
+          {% csrf_token %}
+          <div class="grid grid--three">
+              {% for profile in profiles %}
+                  <div class="column card">
+                      <div class="dev">
+                              <div class="dev__profile">
+                                  <img class="avatar avatar--md" src="{{profile.profile_image.url}}" alt="image" style="margin-left: 2em;">
+                                  <div class="dev__meta">
+                                      <h3>{{profile.name}}</h3>
+                                      <h5>{{profile.short_intro|slice:"60"}}</h5>
+                                      <div class="form__field form__field--checkbox">
+                                        <p>Join member:</p>
+                                        <input class="input input--checkbox" id="formInput#checkbox-01" type="checkbox" value="{{profile.id}}" name="invite" />
+                                        <label for="formInput#checkbox-01">pick me</label>
+                                      </div>
+                                  </div>
+                              </div>
+                      </div>
+                  </div>
+              {% endfor %}
+          </div>
+          <input class="btn btn--main--outline" type="submit" value="submit">
+        </form>
+      </div>
+  </section>
+    {% include 'pagination.html' with queryset=profiles custom_range=custom_range %}
+</main>
+{% endblock %}

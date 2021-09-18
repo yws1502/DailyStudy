@@ -34,8 +34,19 @@ def search_groups(request):
     search_query = request.GET.get('search_query')
   profiles = Profile.objects.filter(name__icontains=search_query)
 
-  groups = StudyGroup.objects.distinct().filter(
+  objects = StudyGroup.objects.distinct().filter(
     Q(name__icontains=search_query) |
     Q(profile__in=profiles)
   )
-  return groups, search_query
+  return objects, search_query
+
+def search_invite(request):
+  search_query = ''
+  if request.GET.get('search_query'):
+    search_query = request.GET.get('search_query')
+
+  invite_list = Profile.objects.filter(
+    Q(name__icontains=search_query) &
+    Q(group_id=None)
+  )
+  return invite_list, search_query

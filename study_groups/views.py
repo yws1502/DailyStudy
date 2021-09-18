@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from users.models import Profile, Message
+from users.utils import paginator_object
 from .models import *
 from .forms import *
 from .utils import *
@@ -30,7 +31,7 @@ def study_group(request, pk):
   }
   return render(request, 'study_groups/group.html', context)
 
-login_required(login_url='login')
+@login_required(login_url='login')
 def group_create(request):
   form = StudyGroupForm()
   profile = request.user.profile
@@ -49,7 +50,7 @@ def group_create(request):
   context = {'form' : form}
   return render(request, 'study_groups/group_form.html', context)
 
-login_required(login_url='login')
+@login_required(login_url='login')
 def group_update(request, pk):
   group = StudyGroup.objects.get(id=pk)
   form = StudyGroupForm(instance=group)
@@ -65,7 +66,7 @@ def group_update(request, pk):
   }
   return render(request, 'study_groups/group_form.html', context)
 
-login_required(login_url='login')
+@login_required(login_url='login')
 def group_delete(request, pk):
   group = StudyGroup.objects.get(id=pk)
   # 그룹 리더의 is_leader False로 값 변경
@@ -78,7 +79,7 @@ def group_delete(request, pk):
   context = {'object': group}
   return render(request, 'delete_form.html', context)
 
-login_required(login_url='login')
+@login_required(login_url='login')
 def group_leave(request, pk):
   group = StudyGroup.objects.get(id=pk)
   profile = request.user.profile
@@ -102,18 +103,30 @@ def group_leave(request, pk):
     context['profiles'] = profiles
   return render(request, 'study_groups/withdrawal.html', context)
 
-login_required(login_url='login')
-def group_invite(request, pk):
-  recipient = Profile.objects.get(id=pk)
-  sender = request.user.profile
-  group_name = StudyGroup.objects.get(id=sender.group_id.id)
-  Message.objects.create(
-    recipient = recipient,
-    sender = sender,
-    name = sender.name,
-    subject = '%s 스터디그룹 초대 메시지' % group_name,
-    body = '%s님! 저희 %s와 함께 공부해보아요!' % (recipient.name, group_name),
-    is_invite = True
-  )
+@login_required(login_url='login')
+def group_invite(request):
+  profiles, search_query = search_invite(request)
+  profiles, page_range = paginator_object(request, profiles, 6)
   
-  return redirect('profiles')
+  if request.method == 'POST':
+    sender = request.user.profile
+    group_name = StudyGroup.objects.get(id=sender.group_id.id)
+    for pk in request.POST.getlist('invite'):
+      recipient = Profile.objects.get(id=pk)
+      # 초대 메시지 전송하기
+      Message.objects.create(
+        recipient = recipient,
+        sender = sender,
+        name = sender.name,
+        subject = '%s 스터디그룹 초대 메세지' % group_name,
+        body = '%s님! 저희 %s와 함께 공부해보아요!' % (recipient.name, group_name),
+        is_invite = True
+      )
+    return redirect('profiles')
+
+  context = {
+    'profiles': profiles,
+    'search_query': search_query,
+    'page_range': page_range
+  }
+  return render(request, 'study_groups/group_invite.html', context)
