@@ -2,16 +2,16 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from users.models import Profile, Message
-from users.utils import paginator_object
+from common.utils import *
 from .models import *
 from .forms import *
-from .utils import *
+# from .utils import *
 # Create your views here.
 
 def study_groups(request):
   groups = StudyGroup.objects.all()
   groups, search_query = search_groups(request)
-  groups, page_range = paginator_group(request, groups, 3)
+  groups, page_range = paginator_object(request, groups, 3)
 
   context = {
     'groups' : groups,

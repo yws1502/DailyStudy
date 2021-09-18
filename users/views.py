@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.shortcuts import render, redirect
 
+from common.utils import *
 from .models import *
 from .forms import *
-from .utils import *
 # Create your views here.
 
 ## Login / Logout / Register ##
