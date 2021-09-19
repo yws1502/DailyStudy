@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.shortcuts import render, redirect
 
+from common.utils import *
 from .models import *
 from .forms import *
-from .utils import *
 # Create your views here.
 
 ## Login / Logout / Register ##
@@ -82,7 +82,7 @@ def profile(request, pk):
     }
     return render(request, 'users/profile.html', context)
 
-login_required(login_url='login')
+@login_required(login_url='login')
 def profile_update(request):
     profile = request.user.profile
     form = ProfileForm(instance=profile)
@@ -97,7 +97,7 @@ def profile_update(request):
     return render(request, 'users/profile_form.html', context)
 
 ## Algorithm ##
-login_required(login_url='login')
+@login_required(login_url='login')
 def algorithm_create(request):
     profile = request.user.profile
     form = AlgorithmForm()
@@ -114,7 +114,7 @@ def algorithm_create(request):
     context = {'form' : form}
     return render(request, 'users/algorithm_form.html', context)
 
-login_required(login_url='login')
+@login_required(login_url='login')
 def algorithm_update(request, pk):
     algorithm = Algorithm.objects.get(id=pk)
     form = AlgorithmForm(instance=algorithm)
@@ -126,7 +126,7 @@ def algorithm_update(request, pk):
     context = {'form':form, 'algorithm':algorithm}
     return render(request, 'users/algorithm_form.html', context)
 
-login_required(login_url='login')
+@login_required(login_url='login')
 def algorithm_delete(request, pk):
     profile = request.user.profile
     algorithm = Algorithm.objects.get(id=pk)
@@ -141,7 +141,7 @@ def algorithm_delete(request, pk):
     return render(request, 'delete_form.html', context)
 
 ## message ##
-login_required(login_url='login')
+@login_required(login_url='login')
 def inbox(request):
     profile = request.user.profile
     message_requests = profile.messages.all()
@@ -153,7 +153,7 @@ def inbox(request):
     }
     return render(request, 'users/inbox.html', context)
 
-login_required(login_url='login')
+@login_required(login_url='login')
 def message(request, pk):
     message = Message.objects.get(id=pk)
     if message.is_read == False:
@@ -169,7 +169,7 @@ def message(request, pk):
     }
     return render(request, 'users/message.html', context)
 
-login_required(login_url='login')
+@login_required(login_url='login')
 def message_create(request, pk):
     recipient = Profile.objects.get(id=pk)
     form = MessageForm()
@@ -194,7 +194,7 @@ def message_create(request, pk):
     }
     return render(request, 'users/message_form.html', context)
 
-login_required(login_url='login')
+@login_required(login_url='login')
 def message_delete(request, pk):
     message = Message.objects.get(id=pk)
 

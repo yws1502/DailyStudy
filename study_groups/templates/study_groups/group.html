@@ -9,7 +9,7 @@
             <div class="column column--1of3">
               <img class="singleProject__preview" src="{{group.group_image.url}}" alt="portfolio thumbnail" />
               {% if request.user.profile.group_id == group %}
-                <a class="singleProject__liveLink" href="{% url 'profiles' %}"><i class="im im-external-link"></i>
+                <a class="singleProject__liveLink" href="{% url 'group_invite' %}"><i class="im im-external-link"></i>
                     초대하기
                 </a>
               {% if member_count > 1 %}
@@ -39,7 +39,7 @@
                 <h3 class="singleProject__subtitle">Member</h3>
                 {% for profile in profiles %}
                 <div class="column card">
-                  <div class="dev">
+                  <div class="dev" style="display: flex;">
                     <a href="{% url 'profile' pk=profile.id %}" class="card__body">
                       <div class="dev__profile">
                         <img class="avatar avatar--md" src="{{profile.profile_image.url}}" alt="image" />
@@ -48,8 +48,10 @@
                           {{profile.short_intro|slice:"60"}}
                         </div>
                       </div>
-                      <p class="dev__info">{{profile.bio|slice:"150"}}</p>
                     </a>
+                      <div class="card__body" id="card_side">
+                        Coming Soon...
+                      </div>
                   </div>
                 </div>
                 {% endfor %}

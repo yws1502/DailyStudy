@@ -29,6 +29,9 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.owner)
 
+    class Meta:
+        ordering = ['-solved_count']
+
 class Algorithm(models.Model):
     language_choices = [
         ('Python3', 'Python3'),
@@ -62,6 +65,9 @@ class Algorithm(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['created']
 
 class Message(models.Model):
     sender = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True)

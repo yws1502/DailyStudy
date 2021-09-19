@@ -13,9 +13,6 @@
                         {% else %}
                             <a class="tag tag--pill tag--main settings__btn" href="{% url 'message_create' profile.id %}"><i class="im im-edit"></i> Message</a>
                         {% endif %}
-                        {% if profile.owner != request.user and request.user.is_authenticated and not profile.group_id %}
-                            <a class="tag tag--pill tag--main settings__btn" href="{% url 'group_invite' profile.id %}"><i class="im im-book"></i> Invite</a>
-                        {% endif %}
                         <img class="avatar avatar--xl dev__avatar" src="{{profile.profile_image.url}}" alt="image">
                         <h2 class="dev__name">{{profile.name}}</h2>
                         <p class="dev__title">{{profile.short_intro}}</p>
@@ -55,7 +52,7 @@
             <div class="column column--2of3">
                 <div class="devInfo">
                     <h3 class="devInfo__title">About Me</h3>
-                    <p class="devInfo__about">{{profile.about_me}}</p>
+                    <p class="devInfo__about">{{profile.about_me|linebreaks}}</p>
                 </div>
 
                 <div class="settings">
@@ -84,7 +81,7 @@
                     <tr>
                         <td class="settings__tableInfo">
                             <h4><a href="{{algorithm.link}}">{{algorithm.name}}</a>- {{algorithm.type}}</h4>  <br>
-                            <p class="devInfo__about">{{algorithm.description}}</p>
+                            <p class="devInfo__about">{{algorithm.description|linebreaksbr}}</p>
                         </td>
                         <td class="settings__tableActions">
                             {% if profile.owner == request.user %}

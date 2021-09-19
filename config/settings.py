@@ -179,24 +179,24 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
-AWS_ACCESS_KEY_ID = get_secret('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = get_secret('AWS_SECRET_ACCESS_KEY')
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# django에서는 S3를 사용하기 위해 boto3를 사용한다.
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# AWS_ACCESS_KEY_ID = get_secret('AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = get_secret('AWS_SECRET_ACCESS_KEY')
 
-# 쿼리셋을 url로 보여주기 싫다면 False
-AWS_QUERYSTRING_AUTH = False
+# # django에서는 S3를 사용하기 위해 boto3를 사용한다.
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-# 같은 이름의 사진을 허용하여 저장하려면 False로 지정
-AWS_S3_FILE_OVERWRITE = False
+# # 쿼리셋을 url로 보여주기 싫다면 False
+# AWS_QUERYSTRING_AUTH = False
 
-AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID
-AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY
-AWS_STORAGE_BUCKET_NAME = 'dailystudy-bucket'
+# # 같은 이름의 사진을 허용하여 저장하려면 False로 지정
+# AWS_S3_FILE_OVERWRITE = False
 
-# 해당 리전이 v2 버전이 아닌 경우 명시적으로 v4를 지정해줘야한다.
-AWS_S3_REGION_NAME = 'ap-northeast-2' #change to your region
-AWS_S3_SIGNATURE_VERSION = 's3v4'
+# AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID
+# AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY
+# AWS_STORAGE_BUCKET_NAME = 'dailystudy-bucket'
+
+# # 해당 리전이 v2 버전이 아닌 경우 명시적으로 v4를 지정해줘야한다.
+# AWS_S3_REGION_NAME = 'ap-northeast-2' #change to your region
+# AWS_S3_SIGNATURE_VERSION = 's3v4'
