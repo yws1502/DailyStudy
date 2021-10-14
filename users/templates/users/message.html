@@ -7,7 +7,7 @@
         <a class="backButton" href="{{request.GET.prev}}"><i class="im im-angle-left"></i></a>
         <h2 class="message__subject">{{message.subject}}</h2>
         {% if message.sender %}
-          <a class="message__author" href="{% url 'profile' pk=message.sender.id %}">{{message.name}}</a>
+          <a class="message__author" href="{% url 'profile' pk=message.sender.id %}">{{message.sender.name}}</a>
         {% else %}
           <p class="message__author">{{message.name}}</p>
         {% endif %}

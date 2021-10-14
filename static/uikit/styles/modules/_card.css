@@ -20,6 +20,7 @@
 .card__body,
 .card__header {
   padding: 2rem 2.5rem;
+  margin-left: 10px;
 }
 
 .card__header {
