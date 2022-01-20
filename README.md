@@ -30,8 +30,6 @@
 | -- | -- |
 | python | 3.8.5 |
 | django | 3.2.7 |
-| whitenoise | 5.3.0 |
-| boto3 | 1.18.43 |
 | mysqlclient | 2.0.3 |
 
 ## 3. Daily Study 기능 설명
