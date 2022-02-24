@@ -1,8 +1,5 @@
 # DailyStudy
 
-## 배포 URL
-- https://dailystudy.herokuapp.com/
-
 ## 목차
 > 1. 프로젝트 소개
 > 2. 기술 스택
